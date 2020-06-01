@@ -1,7 +1,13 @@
+#controls {
+  width: 70%;
+  margin: auto;
+  align-content: center;
+}
+
 #container {
   display: grid;
   grid-gap: 0px;
-  width: 50%;
+  width: 70%;
   margin: auto;
   background-color: gray;
 }
@@ -11,7 +17,7 @@
   height: 20vmin;
   width: 20vmin;
   */
-  padding: 10vh;
+  padding: 12vh;
   background-color: white;
   border: 1px solid black;
 }

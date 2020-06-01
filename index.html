@@ -4,13 +4,17 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div id="controls">
+      <button onclick="Reset()">Create New Sketchpad</button>
+      Sketchpad size: <input type="number" id="sketchpadSize" value="16" />
+    </div>
     <div id="container"></div>
   </body>
   <script>
-    const gridSize = 16;
-    CreateGrid();
+    //CreateGrid();
     //create the initial grid using the gridSize for size
     function CreateGrid() {
+      let gridSize = document.getElementById("sketchpadSize").value;
       //grab reference to container grid will live in
       const container = document.querySelector("#container");
       for (i = 0; i < gridSize; i++) {
@@ -34,6 +38,18 @@
     function HoverElement(element) {
       element.classList.remove("gridElement");
       element.classList.add("gridElementHovered");
+    }
+
+    //resets the grid
+    function Reset() {
+      ClearOldGrid();
+      CreateGrid();
+    }
+
+    //removes all of the elements inside container
+    function ClearOldGrid() {
+      const container = document.getElementById("container");
+      container.innerHTML = "";
     }
   </script>
 </html>
