@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>Etch-a-Sketch</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+  <script>
+    const gridSize = 16;
+    CreateGrid();
+    //create the initial grid using the gridSize for size
+    function CreateGrid() {
+      //grab reference to container grid will live in
+      const container = document.querySelector("#container");
+      for (i = 0; i < gridSize; i++) {
+        const gridElement = document.createElement("div");
+        gridElement.classList.add("gridElement");
+        gridElement.onmouseover = function () {
+          HoverElement(this);
+        };
+        container.appendChild(gridElement);
+      }
+      let columnSize = Math.round(Math.sqrt(gridSize));
+      document
+        .getElementById("container")
+        .setAttribute(
+          "style",
+          "grid-template-columns: repeat(" + columnSize + ", 1fr);"
+        );
+    }
+
+    //changes the gridElement's class to one that is black
+    function HoverElement(element) {
+      element.classList.remove("gridElement");
+      element.classList.add("gridElementHovered");
+    }
+  </script>
+</html>

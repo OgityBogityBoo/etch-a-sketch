@@ -1,0 +1,23 @@
+#container {
+  display: grid;
+  grid-gap: 0px;
+  width: 50%;
+  margin: auto;
+  background-color: gray;
+}
+
+.gridElement {
+  /*
+  height: 20vmin;
+  width: 20vmin;
+  */
+  padding: 10vh;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.gridElementHovered {
+  padding: 10vh;
+  background-color: black;
+  border: 1px solid black;
+}
