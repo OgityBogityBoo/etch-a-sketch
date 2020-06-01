@@ -14,7 +14,8 @@
     //CreateGrid();
     //create the initial grid using the gridSize for size
     function CreateGrid() {
-      let gridSize = document.getElementById("sketchpadSize").value;
+      let sketchpadSize = document.getElementById("sketchpadSize").value;
+      let gridSize = sketchpadSize * sketchpadSize;
       //grab reference to container grid will live in
       const container = document.querySelector("#container");
       for (i = 0; i < gridSize; i++) {
@@ -25,12 +26,16 @@
         };
         container.appendChild(gridElement);
       }
-      let columnSize = Math.round(Math.sqrt(gridSize));
+      //let columnSize = Math.round(Math.sqrt(gridSize));
       document
         .getElementById("container")
         .setAttribute(
           "style",
-          "grid-template-columns: repeat(" + columnSize + ", 1fr);"
+          "grid-template-columns: repeat(" +
+            sketchpadSize +
+            ", 1fr); grid-template-rows: repeat(" +
+            sketchpadSize +
+            ", 1fr);"
         );
     }
 
@@ -42,14 +47,29 @@
 
     //resets the grid
     function Reset() {
-      ClearOldGrid();
-      CreateGrid();
+      if (CheckSketchpadSize()) {
+        ClearOldGrid();
+        CreateGrid();
+      } else {
+        alert("Invalid size. Please keep size between 2-64.");
+      }
     }
 
     //removes all of the elements inside container
     function ClearOldGrid() {
       const container = document.getElementById("container");
       container.innerHTML = "";
+    }
+
+    function CheckSketchpadSize() {
+      let sketchpadSize = document.getElementById("sketchpadSize").value;
+      if (sketchpadSize > 64) {
+        return false;
+      }
+      if (sketchpadSize < 2) {
+        return false;
+      }
+      return true;
     }
   </script>
 </html>
