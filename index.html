@@ -7,12 +7,17 @@
     <div id="controls">
       <button onclick="Reset()">Create New Sketchpad</button>
       Sketchpad size: <input type="number" id="sketchpadSize" value="16" />
+      <button onclick="DisplayGridLines()">Grid Lines ON/OFF</button>
+      <button onclick="ActivateSketchMode()">Sketch Mode ON/OFF</button>;
     </div>
     <div id="container"></div>
   </body>
   <script>
-    //CreateGrid();
-    //create the initial grid using the gridSize for size
+    //variable to show grid lines
+    let gridLines = true;
+    //variable for sketch mode
+    let sketchMode = false;
+
     function CreateGrid() {
       let sketchpadSize = document.getElementById("sketchpadSize").value;
       let gridSize = sketchpadSize * sketchpadSize;
@@ -26,7 +31,6 @@
         };
         container.appendChild(gridElement);
       }
-      //let columnSize = Math.round(Math.sqrt(gridSize));
       document
         .getElementById("container")
         .setAttribute(
@@ -41,8 +45,13 @@
 
     //changes the gridElement's class to one that is black
     function HoverElement(element) {
-      element.classList.remove("gridElement");
-      element.classList.add("gridElementHovered");
+      if (sketchMode == false) {
+        element.classList.remove("gridElement");
+        element.classList.add("gridElementHovered");
+      }
+      if (sketchMode == true) {
+        AddShade(element);
+      }
     }
 
     //resets the grid
@@ -61,6 +70,7 @@
       container.innerHTML = "";
     }
 
+    //checks user input value. returns false if value is invalid
     function CheckSketchpadSize() {
       let sketchpadSize = document.getElementById("sketchpadSize").value;
       if (sketchpadSize > 64) {
@@ -70,6 +80,45 @@
         return false;
       }
       return true;
+    }
+
+    //displays the grid lines or removes them. on/off switch
+    function DisplayGridLines() {
+      if (gridLines == false) {
+        gridLines = true;
+        var gridElements = document.getElementsByClassName("gridElement");
+        for (i = 0; i < gridElements.length; i++) {
+          gridElements[i].setAttribute("style", "border: 1px solid #ddd;");
+        }
+        return;
+      }
+      if (gridLines == true) {
+        gridLines = false;
+        var gridElements = document.getElementsByClassName("gridElement");
+        for (i = 0; i < gridElements.length; i++) {
+          gridElements[i].setAttribute("style", "border: none;");
+        }
+        return;
+      }
+    }
+
+    //activates or deactivates sketch mode
+    function ActivateSketchMode() {
+      if (sketchMode == true) {
+        sketchMode = false;
+        return;
+      }
+      if (sketchMode == false) {
+        sketchMode = true;
+        return;
+      }
+    }
+
+    function AddShade(gridElement) {
+      //increase by 10% which is 25.5 (0 - 255)
+      let rgb = window
+        .getComputedStyle(gridElement, null)
+        .getPropertyValue("background-color");
     }
   </script>
 </html>

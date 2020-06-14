@@ -10,7 +10,8 @@
   width: 550px;
   height: 550px;
   margin: auto;
-  background-color: gray;
+  background-color: rgb(60, 60, 60);
+  border: 1px solid #666;
 }
 
 .gridElement {
