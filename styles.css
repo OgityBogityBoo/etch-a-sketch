@@ -19,6 +19,14 @@
   border: 1px solid #ddd;
 }
 
+.withBorder {
+  border: 1px solid #ddd;
+}
+
+.withoutBorder {
+  border: none;
+}
+
 .gridElementHovered {
   /*padding: 1vh;*/
   background-color: black;

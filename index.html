@@ -89,7 +89,8 @@
         gridLines = true;
         var gridElements = document.getElementsByClassName("gridElement");
         for (i = 0; i < gridElements.length; i++) {
-          gridElements[i].setAttribute("style", "border: 1px solid #ddd;");
+          gridElements[i].classList.remove("withoutBorder");
+          gridElements[i].classList.add("withBorder");
         }
         return;
       }
@@ -97,7 +98,8 @@
         gridLines = false;
         var gridElements = document.getElementsByClassName("gridElement");
         for (i = 0; i < gridElements.length; i++) {
-          gridElements[i].setAttribute("style", "border: none;");
+          gridElements[i].classList.remove("withBorder");
+          gridElements[i].classList.add("withoutBorder");
         }
         return;
       }
@@ -127,20 +129,36 @@
 
 
     function DecreaseRGB(str, amt){
+      //split the RGB string 'str' into an array 'vals'
       var vals = str.substring(str.indexOf('(') +1, str.length -1).split(', ');
 
+      //decrease the amount for each value in the 'val' array by 'amt'
+      //if the value of 'val' is less than zero, floor at zero
       for(i = 0; i < vals.length; i++){
         vals[i] = vals[i] - amt;
         if(vals[i] < 0){
           vals[i] = 0;
         }
       }
+
+      //converts the 'val' array into a hex value string 'b'
       var b = vals.map(function(x){             //For each array element
         x = parseInt(x).toString(16);      //Convert to a base16 string
         return (x.length==1) ? "0"+x : x;  //Add zero if we get only one character
       });
       b = "#"+b.join("");
-      console.log(b);
+      return b;
+    }
+
+    function GetHexString(str){
+      //split the RGB string 'str' into an array 'vals'
+      var vals = str.substring(str.indexOf('(') +1, str.length -1).split(', ');
+      //converts the 'val' array into a hex value string 'b'
+      var b = vals.map(function(x){             //For each array element
+        x = parseInt(x).toString(16);      //Convert to a base16 string
+        return (x.length==1) ? "0"+x : x;  //Add zero if we get only one character
+      });
+      b = "#"+b.join("");
       return b;
     }
   </script>
