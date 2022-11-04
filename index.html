@@ -26,6 +26,7 @@
       for (i = 0; i < gridSize; i++) {
         const gridElement = document.createElement("div");
         gridElement.classList.add("gridElement");
+        gridElement.id = "ge" + i;
         gridElement.onmouseover = function () {
           HoverElement(this);
         };
@@ -60,7 +61,7 @@
         ClearOldGrid();
         CreateGrid();
       } else {
-        alert("Invalid size. Please keep size between 2-64.");
+        alert("Invalid size. Please keep size between 2-128.");
       }
     }
 
@@ -73,7 +74,7 @@
     //checks user input value. returns false if value is invalid
     function CheckSketchpadSize() {
       let sketchpadSize = document.getElementById("sketchpadSize").value;
-      if (sketchpadSize > 64) {
+      if (sketchpadSize > 128) {
         return false;
       }
       if (sketchpadSize < 2) {
@@ -119,6 +120,28 @@
       let rgb = window
         .getComputedStyle(gridElement, null)
         .getPropertyValue("background-color");
+      
+      document.getElementById(gridElement.id).style.backgroundColor = String(DecreaseRGB(rgb, 25));
+    }
+
+
+
+    function DecreaseRGB(str, amt){
+      var vals = str.substring(str.indexOf('(') +1, str.length -1).split(', ');
+
+      for(i = 0; i < vals.length; i++){
+        vals[i] = vals[i] - amt;
+        if(vals[i] < 0){
+          vals[i] = 0;
+        }
+      }
+      var b = vals.map(function(x){             //For each array element
+        x = parseInt(x).toString(16);      //Convert to a base16 string
+        return (x.length==1) ? "0"+x : x;  //Add zero if we get only one character
+      });
+      b = "#"+b.join("");
+      console.log(b);
+      return b;
     }
   </script>
 </html>
